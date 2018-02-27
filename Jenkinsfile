@@ -8,7 +8,8 @@ pipeline {
     stage('Build') {
       steps {
         sh 'echo "Building! new"'
-        sh 'su root -c "npm install --prefix src"'
+        sh 'su root'
+        sh 'npm install --prefix src'
       }
     }
     stage('Docker build') {
