@@ -1,4 +1,4 @@
-FROM node:alpine-6
+FROM node:carbon
 
 # Create app directory
 WORKDIR src
