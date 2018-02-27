@@ -1,1 +1,3 @@
-FROM node
+FROM node:alpine
+
+RUN apk add docker
