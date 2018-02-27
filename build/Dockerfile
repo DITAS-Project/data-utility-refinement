@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM docker:stable-dind
 
 RUN apk update
-RUN apk add docker
+RUN apk add nodejs nodejs-npm
