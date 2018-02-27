@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Docker build') {
       steps {
-        sh "docker build"
+        sh "docker build -t plebanip/data-utility-refinement ./src"
       }
     }
   }
