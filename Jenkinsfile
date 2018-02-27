@@ -8,7 +8,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'echo "Building! new"'
-        sh 'npm install'
+        sh 'npm install --prefix src'
       }
     }
     stage('Deploy') {
