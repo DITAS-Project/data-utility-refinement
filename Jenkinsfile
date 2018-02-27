@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    docker {
+    dockerfile {
       dir 'build'
     }
   }
