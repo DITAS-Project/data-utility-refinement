@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'node:carbon'
+      image 'node:6-alpine'
       args '-p 8080:8080'
     }
   }
@@ -9,6 +9,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'echo "Building! new"'
+        sh 'npm install'
       }
     }
     stage('Deploy') {
