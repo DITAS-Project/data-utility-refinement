@@ -1,7 +1,3 @@
-FROM docker:latest
+FROM docker
 
-USER root
-RUN apk update
-RUN apk add openrc --no-cache
-RUN apk add docker
-RUN docker ps
+RUN apk add --update nodejs nodejs-npm
