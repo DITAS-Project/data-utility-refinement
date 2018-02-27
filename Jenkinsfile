@@ -1,7 +1,7 @@
 pipeline {
   agent {
-    dockerfile {
-      dir 'build'
+    docker {
+      image 'node:9-alpine'
     }
   }
   stages {
