@@ -12,9 +12,9 @@ pipeline {
       }
     }
     stage('Docker build') {
-      steps {
+
         docker.build("db", "src")
-      }
+      
     }
   }
   post {
