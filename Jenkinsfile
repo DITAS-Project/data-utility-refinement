@@ -9,7 +9,6 @@ pipeline {
     stage('Build') {
       steps {
         sh 'echo "Building! new"'
-        sh 'npm install'
       }
     }
     stage('Deploy') {
