@@ -12,8 +12,10 @@ pipeline {
       }
     }
     stage('Docker build') {
-      script {
-        docker.build("db", "src")
+      steps {
+        script {
+          docker.build("db", "src")
+        }
       }
     }
   }
