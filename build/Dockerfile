@@ -1,3 +1,1 @@
-FROM docker
-
-RUN apk add --update nodejs nodejs-npm
+FROM node

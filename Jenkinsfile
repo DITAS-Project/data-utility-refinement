@@ -1,14 +1,13 @@
 pipeline {
   agent {
-    dockerfile {
-      dir 'build'
+    docker {
+      image 'node-docker'
     }
   }
   stages {
     stage('Build') {
       steps {
         sh 'echo "Building! new"'
-        sh 'su root'
         sh 'npm install --prefix src'
       }
     }
