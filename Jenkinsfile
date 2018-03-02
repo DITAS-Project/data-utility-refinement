@@ -36,6 +36,8 @@ pipeline {
                 }
                 echo "Done"
                 // TODO change this to the ditas official Docker Hub user
+                // docker login requieres sudo (https://docs.docker.com/engine/reference/commandline/login/#extended-description)
+                sh "sudo docker login -u aitorf -p ${password}"
                 echo 'Login to Docker Hub as aitorf...'
                 sh "docker login -u aitorf -p ${password}"
                 echo "Done"
