@@ -6,7 +6,8 @@ pipeline {
             // -v ...  > bind mount the docker socker from the host to allow the container where we are building, to create docker images
             // -u 0    > to run the container as root. Otherwise the normal user can't access the Docker socker
             // TO-DO add a cache volume for NPM?
-            args '-u 0 -v /var/run/docker.sock:/var/run/docker.sock'
+            //args '-u 0 -v /var/run/docker.sock:/var/run/docker.sock'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
     stages {
