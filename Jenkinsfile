@@ -52,7 +52,7 @@ pipeline {
     }
     post {
         always {
-            echo 'Post action fired'
+            echo 'Post action fired '
         }
 
     }
