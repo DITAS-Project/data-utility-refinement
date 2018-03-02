@@ -45,7 +45,7 @@ pipeline {
                 echo "Done"
             }
         }
-        stage('Deployment') {
+        stage('Deployment ') {
             steps {
                 echo 'TO-DO'
             }
