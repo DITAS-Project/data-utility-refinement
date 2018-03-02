@@ -35,7 +35,7 @@ pipeline {
                 sh "docker login -u aitorf -p ${password}"
                 echo "Done"
                 echo "Pushing the image aitorf/data-utility-refinement:${env.BUILD_ID}..."
-                sh "docker push aitorf/sdata-utility-refinement:${env.BUILD_ID}"
+                sh "docker push aitorf/data-utility-refinement:${env.BUILD_ID}"
                 echo "Done"
             }
         }
