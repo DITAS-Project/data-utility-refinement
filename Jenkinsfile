@@ -23,7 +23,7 @@ pipeline {
                 echo 'Creating the image...'
                 // This will search for a Dockerfile in the src folder and will build the image to the local repository
                 // TODO change the aitorf repo to the DITAS official repo
-                //sh "docker build -t \"aitorf/data-utility-refinement:${env.BUILD_ID}\" -f src/Dockerfile ."
+                // Using latest tag to override tha newest image in the hub
                 sh "docker build -t \"aitorf/data-utility-refinement:latest\" -f src/Dockerfile ."
                 echo "Done"
             }
@@ -42,9 +42,8 @@ pipeline {
                 sh "docker login -u aitorf -p ${password}"
                 echo "Done"
                 // TODO change the aitorf repo to the DITAS official repo
-                echo "Pushing the image aitorf/data-utility-refinement:${env.BUILD_ID}..."
+                echo "Pushing the image aitorf/data-utility-refinement:latest..."
                 // TODO change the aitorf repo to the DITAS official repo
-                //sh "docker push aitorf/data-utility-refinement:${env.BUILD_ID}"
                 sh "docker push aitorf/data-utility-refinement:latest"
                 echo "Done"
             }
