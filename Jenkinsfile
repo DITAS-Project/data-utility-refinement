@@ -43,7 +43,8 @@ pipeline {
                 // TODO change the aitorf repo to the DITAS official repo
                 echo "Pushing the image aitorf/data-utility-refinement:${env.BUILD_ID}..."
                 // TODO change the aitorf repo to the DITAS official repo
-                sh "docker push aitorf/data-utility-refinement:${env.BUILD_ID}"
+                //sh "docker push aitorf/data-utility-refinement:${env.BUILD_ID}"
+                sh "docker push aitorf/data-utility-refinement:latest"
                 echo "Done"
             }
         }
