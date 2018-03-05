@@ -23,7 +23,8 @@ pipeline {
                 echo 'Creating the image...'
                 // This will search for a Dockerfile in the src folder and will build the image to the local repository
                 // TODO change the aitorf repo to the DITAS official repo
-                sh "docker build -t \"aitorf/data-utility-refinement:${env.BUILD_ID}\" -f src/Dockerfile ."
+                //sh "docker build -t \"aitorf/data-utility-refinement:${env.BUILD_ID}\" -f src/Dockerfile ."
+                sh "docker build -t \"aitorf/data-utility-refinement:latest\" -f src/Dockerfile ."
                 echo "Done"
             }
         }
