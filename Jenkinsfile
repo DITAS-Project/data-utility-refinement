@@ -1,7 +1,7 @@
 pipeline {
     agent {
         dockerfile {
-            // This file must be in the root of the repo 
+            // This file must be in the root of the repo
             filename 'Dockerfile.build'
             // -v ...  > bind mount the docker socker from the host to allow the container where we are building, to create docker images
             // -u 0    > to run the container as root. Otherwise the normal user can't access the Docker socker
@@ -23,7 +23,7 @@ pipeline {
                 echo 'Creating the image...'
                 // This will search for a Dockerfile in the src folder and will build the image to the local repository
                 // Using latest tag to override tha newest image in the hub
-                sh "docker build -t \"ditas/data-utility-refinement:latest\" -f src/Dockerfile ."
+                sh "cd src; docker build -t \"ditas/data-utility-refinement:latest\" ."
                 echo "Done"
             }
         }
