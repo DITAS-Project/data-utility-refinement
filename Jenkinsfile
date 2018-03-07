@@ -22,9 +22,8 @@ pipeline {
             steps {
                 echo 'Creating the image...'
                 // This will search for a Dockerfile in the src folder and will build the image to the local repository
-                // TODO change the aitorf repo to the DITAS official repo
                 // Using latest tag to override tha newest image in the hub
-                sh "docker build -t \"aitorf/data-utility-refinement:latest\" -f src/Dockerfile ."
+                sh "docker build -t \"ditas/data-utility-refinement:latest\" -f src/Dockerfile ."
                 echo "Done"
             }
         }
@@ -36,15 +35,14 @@ pipeline {
                     password = readFile '/opt/ditas-docker-hub.passwd'
                 }
                 echo "Done"
-                // TODO change this to the ditas official Docker Hub user
-                sh "docker login -u aitorf -p ${password}"
-                echo 'Login to Docker Hub as aitorf...'
-                sh "docker login -u aitorf -p ${password}"
+                // Login to DockerHub with the ditas generic Docker Hub user
+                sh "docker login -u ditasgeneric -p ${password}"
+                echo 'Login to Docker Hub as ditasgeneric...'
+                sh "docker login -u ditasgeneric -p ${password}"
                 echo "Done"
-                // TODO change the aitorf repo to the DITAS official repo
-                echo "Pushing the image aitorf/data-utility-refinement:latest..."
-                // TODO change the aitorf repo to the DITAS official repo
-                sh "docker push aitorf/data-utility-refinement:latest"
+                echo "Pushing the image ditas/data-utility-refinement:latest..."
+                // Push the image to DockerHub
+                sh "docker push ditas/data-utility-refinement:latest"
                 echo "Done"
             }
         }
