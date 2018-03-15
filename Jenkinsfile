@@ -22,7 +22,8 @@ pipeline {
             post {
                 always {
                     // Record the test report?
-                    // TO-DO
+                    // TO-DOi
+		    echo "To-Do Record tests"
                 }
             }
         }
