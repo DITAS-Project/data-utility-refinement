@@ -35,7 +35,7 @@ pipeline {
                 // This will search for a Dockerfile.artifact in the working directory and build the image to the local repository
                 sh "docker build -t \"ditas/data-utility-refinement\" -f Dockerfile.artifact ."
                 echo "Done"
-                echo 'Retrieving Docker Hub password from /opt/ditas-docker-hub.passwd...'
+                echo 'Retrieving Docker Hub password from /opt/ditas-docker-hub.passwd... '
                 // Get the password from a file. This reads the file from the host, not the container. Slaves already have the password in there.
                 script {
                     password = readFile '/opt/ditas-docker-hub.passwd'
@@ -46,7 +46,7 @@ pipeline {
                 echo "Done"
                 echo "Pushing the image ditas/data-utility-refinement:latest..."
                 sh "docker push ditas/data-utility-refinement:latest"
-                echo "Done"
+                echo "Done "
             }
         }
         stage('Image deploy') {
@@ -60,7 +60,8 @@ pipeline {
                 // TODO state management? We are killing without careing about any operation the conainer could be doing.
 
                 // Ensure that a previously running instance is stopped (-f stops and removes in a single step)
-                sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker rm -f data-utility-refinement'
+                // || true - "docker stop" failt with exit status 1 if image doen't exists, what makes the Pipeline fail. the "|| true" forces the command to exit with 0.
+                sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker rm -f data-utility-refinement || true'
 
                 // Ensure that the last image is pulled
                 sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker pull ditas/data-utility-refinement:latest'
