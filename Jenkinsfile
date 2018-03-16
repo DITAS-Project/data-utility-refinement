@@ -6,7 +6,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:9-alpine'
-					// TODO some cache to avoid npm sintall on every execution?
+					// TODO some cache to avoid npm sintall on every execution? 
                 }
             }
             steps {
