@@ -30,7 +30,7 @@ pipeline {
         stage('Image creation') {
             agent any
             steps {
-                // The Dockerfile.artifact copies the code into the image and run the jar generation. 
+                // The Dockerfile.artifact copies the code into the image and run the jar generation.
                 echo 'Creating the image...'
                 // This will search for a Dockerfile.artifact in the working directory and build the image to the local repository
                 sh "docker build -t \"ditas/data-utility-refinement\" -f Dockerfile.artifact ."
@@ -67,7 +67,7 @@ pipeline {
                 sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker pull ditas/data-utility-refinement:latest'
 
                 // Run and name the image to allow stopping by name
-                sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker run -d --name data-utility-refinement ditas/data-utility-refinement:latest'
+                sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker run -p 8080:8080 -d --name data-utility-refinement ditas/data-utility-refinement:latest'
             }
         }
     }
