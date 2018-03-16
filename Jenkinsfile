@@ -35,7 +35,7 @@ pipeline {
                 // This will search for a Dockerfile.artifact in the working directory and build the image to the local repository
                 sh "docker build -t \"ditas/data-utility-refinement\" -f Dockerfile.artifact ."
                 echo "Done"
-                echo 'Retrieving Docker Hub password from /opt/ditas-docker-hub.passwd... '
+                echo 'Retrieving Docker Hub password from /opt/ditas-docker-hub.passwd...'
                 // Get the password from a file. This reads the file from the host, not the container. Slaves already have the password in there.
                 script {
                     password = readFile '/opt/ditas-docker-hub.passwd'
