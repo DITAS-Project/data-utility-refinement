@@ -57,11 +57,13 @@ pipeline {
                 // Private key for ssh: /opt/keypairs/ditas-testbed-keypair.pem
 
                 // TODO move all these commands to a deploy.sh to open a single SSH connetions
+                // TODO state management? We are killing without careing about any operation the conainer could be doing.
+
+                // Ensure that a previously running instance is stopped (-f stops and removes in a single step)
+                sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker rm -f data-utility-refinement'
+
                 // Ensure that the last image is pulled
                 sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker pull ditas/data-utility-refinement:latest'
-
-                // Ensure that a previously running instance is stopped
-                sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker stop data-utility-refinement'
 
                 // Run and name the image to allow stopping by name
                 sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker run -d --name data-utility-refinement ditas/data-utility-refinement:latest'
