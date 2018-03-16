@@ -11,10 +11,10 @@ pipeline {
             }
             steps {
                 sh 'cd src; npm install'
-				
+
 				// Any artifact? Dont think so
 				// TO-DO
-                
+
                 // Run the tests?
 				// TO-DO
             }
@@ -30,9 +30,9 @@ pipeline {
         stage('Image creation') {
             agent any
             steps {
-                // The Dockerfile.artifact copies the code into the image and run the jar generation. 
+                // The Dockerfile.artifact copies the code into the image and run the jar generation.
                 echo 'Creating the image...'
-                // This will search for a Dockerfile.artifact in the working directory and build the image to the local repository 
+                // This will search for a Dockerfile.artifact in the working directory and build the image to the local repository
                 sh "docker build -t \"ditas/data-utility-refinement\" -f Dockerfile.artifact ."
                 echo "Done"
                 echo 'Retrieving Docker Hub password from /opt/ditas-docker-hub.passwd...'
