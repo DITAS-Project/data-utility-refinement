@@ -6,7 +6,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:9-alpine'
-					// TODO some cache to avoid npm sintall on every execution?  
+					// TODO some cache to avoid npm sintall on every execution?
                 }
             }
             steps {
@@ -30,7 +30,7 @@ pipeline {
         stage('Image creation') {
             agent any
             steps {
-                // The Dockerfile.artifact copies the code into the image and run the jar generation.
+                // The Dockerfile.artifact copies the code into the image and run the jar generation. 
                 echo 'Creating the image...'
                 // This will search for a Dockerfile.artifact in the working directory and build the image to the local repository
                 sh "docker build -t \"ditas/data-utility-refinement\" -f Dockerfile.artifact ."
