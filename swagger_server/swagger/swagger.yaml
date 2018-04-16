@@ -1,23 +1,25 @@
 ---
 swagger: "2.0"
 info:
-  description: "Data Utility Refinement"
+  description: "Data Utility Evaluator"
   version: "0.2.1"
-  title: "Data Utility Refinement API"
+  title: "Data Utility Evaluator API"
   contact:
     email: "pierluigi.plebani@polimi.it"
   license:
     name: "TBD"
-host: "virtserver.swaggerhub.com"
+host: "localhost:8080"
 basePath: "/ditas-project/DataUtilityRefinement/0.2.1"
 tags:
 - name: "Data Utility"
   description: "Definition of data utility"
+- name: "VDC-CAF"
+  description: "Virtual Data Container CAF"
 schemes:
 - "https"
 paths:
-  /datautility:
-    get:
+  /datautilityrefinement:
+    post:
       summary: "recalculate the data utility based on the application"
       description: "By passing the DataUtility values and the application it returns\
         \ new DataUtility values depending on the application"
@@ -38,34 +40,12 @@ paths:
             $ref: "#/definitions/DataUtility"
         400:
           description: "bad input parameter"
-      x-swagger-router-controller: "Default"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
 definitions:
-  RefinementRequest:
-    type: "object"
-    required:
-    - "application"
-    - "datautility"
-    properties:
-      application:
-        type: "string"
-        enum:
-        - "regression,"
-        - "classification"
-        - "clustering"
-        - "associationrules"
-      datautility:
-        $ref: "#/definitions/DataUtility"
-    example:
-      datautility:
-        timeliness: 0.1
-        accuracy: 0.1
-        completeness: 0.1
-        consistency: 0.1
-        URL: "http://mydatasource/pippo"
-      application: "regression,"
   DataUtility:
     type: "object"
     required:
+    - "URL"
     - "accuracy"
     - "completeness"
     - "consistency"
@@ -97,3 +77,26 @@ definitions:
       completeness: 0.1
       consistency: 0.1
       URL: "http://mydatasource/pippo"
+  RefinementRequest:
+    type: "object"
+    required:
+    - "application"
+    - "datautility"
+    properties:
+      application:
+        type: "string"
+        enum:
+        - "regression"
+        - "classification"
+        - "clustering"
+        - "associationrules"
+      datautility:
+        $ref: "#/definitions/DataUtility"
+    example:
+      datautility:
+        timeliness: 0.1
+        accuracy: 0.1
+        completeness: 0.1
+        consistency: 0.1
+        URL: "http://mydatasource/pippo"
+      application: "regression"

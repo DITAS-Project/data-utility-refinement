@@ -1,0 +1,20 @@
+{
+  "classification": {
+    "accuracy": 0.324,
+    "consistency": 0.411,
+    "completeness": 0.265,
+    "timeliness": 0
+  },
+  "clustering": {
+    "accuracy": 0.2,
+    "consistency": 0.5,
+    "completeness": 0.3,
+    "timeliness": 0
+  },
+  "regression":{
+      "accuracy": 0.463,
+    "consistency": 0.306,
+    "completeness": 0.229,
+    "timeliness": 0
+  }
+}

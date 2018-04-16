@@ -5,12 +5,12 @@ pipeline {
         stage('Build - test') {
             agent {
                 docker {
-                    image 'node:9-alpine'
+                    image 'python:slim'
 					// TODO some cache to avoid npm sintall on every execution?
                 }
             }
             steps {
-                sh 'cd src; npm install'
+                sh 'cat requirements.txt'
 
 				// Any artifact? Dont think so
 				// TO-DO
