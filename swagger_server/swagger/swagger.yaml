@@ -1,9 +1,9 @@
 ---
 swagger: "2.0"
 info:
-  description: "Data Utility Evaluator"
+  description: "Data Utility Refinement"
   version: "0.2.1"
-  title: "Data Utility Evaluator API"
+  title: "Data Utility Refinement API"
   contact:
     email: "pierluigi.plebani@polimi.it"
   license:

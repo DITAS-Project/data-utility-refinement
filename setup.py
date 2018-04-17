@@ -18,7 +18,7 @@ REQUIRES = ["connexion"]
 setup(
     name=NAME,
     version=VERSION,
-    description="Data Utility Evaluator API",
+    description="Data Utility Refinement API",
     author_email="pierluigi.plebani@polimi.it",
     url="",
     keywords=["Swagger", "Data Utility Refinement API"],
