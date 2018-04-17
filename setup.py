@@ -21,7 +21,7 @@ setup(
     description="Data Utility Evaluator API",
     author_email="pierluigi.plebani@polimi.it",
     url="",
-    keywords=["Swagger", "Data Utility Evaluator API"],
+    keywords=["Swagger", "Data Utility Refinement API"],
     install_requires=REQUIRES,
     packages=find_packages(),
     package_data={'': ['swagger/swagger.yaml']},
@@ -32,4 +32,3 @@ setup(
     Data Utility Evaluator
     """
 )
-
