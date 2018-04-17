@@ -67,7 +67,7 @@ pipeline {
                 sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker pull ditas/data-utility-refinement:latest'
 
                 // Run and name the image to allow stopping by name
-                sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker run -p 50002:8080 -d --name data-utility-refinement ditas/data-utility-refinement:latest'
+                sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker run -p 50000:8080 -d --name data-utility-refinement ditas/data-utility-refinement:latest'
             }
         }
     }
