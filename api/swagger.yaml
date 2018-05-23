@@ -3,13 +3,13 @@ swagger: "2.0"
 info:
   description: "Data Utility Refinement"
   version: "0.2.1"
-  title: "Data Utility Refinement API"
+  title: "Data Utility Refinement"
   contact:
     email: "pierluigi.plebani@polimi.it"
   license:
     name: "TBD"
 host: "localhost:8080"
-basePath: "/ditas-project/DataUtilityRefinement/0.2.1"
+basePath: "/"
 tags:
 - name: "Data Utility"
   description: "Definition of data utility"
@@ -20,7 +20,7 @@ schemes:
 paths:
   /datautilityrefinement:
     post:
-      summary: "recalculate the data utility based on the application"
+      summary: "Recalculates the data utility based on the application"
       description: "By passing the DataUtility values and the application it returns\
         \ new DataUtility values depending on the application"
       operationId: "refinement"
