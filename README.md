@@ -1,3 +1,8 @@
+* 
+ * This is being developed for the DITAS Project: https://www.ditas-project.eu/
+ */
+
+
 # Swagger generated server
 
 ## Overview
