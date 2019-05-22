@@ -13,7 +13,7 @@ basePath: "/"
 schemes:
 - "https"
 paths:
-  /datautilityrefinement:
+  /v1/refineDataUtility:
     post:
       summary: "Recalculates the data utility based on the application"
       description: "By passing the DataUtility values and the application it returns\
