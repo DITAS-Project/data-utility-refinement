@@ -1,22 +1,3 @@
-/**
- * Copyright 2018 Information System Group, DEIB, Politecnico di Milano
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- * 
- * This is being developed for the DITAS Project: https://www.ditas-project.eu/
- */
-
-
 import json
 
 def DQWeighter(dimensions, application):
@@ -32,18 +13,25 @@ def DQWeighter(dimensions, application):
     completeness_weight = weights[application]['completeness']
     consistency_weight = weights[application]['consistency']
     timeliness_weight = weights[application]['timeliness']
+     
 
 
     accuracy_weighted=accuracy * accuracy_weight
     completeness_weighted=completeness * completeness_weight
     consistency_weighted=consistency * consistency_weight
     timeliness_weighted=timeliness * timeliness_weight
+    
+    normalization= (accuracy_weighted+ completeness_weighted+ consistency_weighted + timeliness_weighted)
+    
+    accuracy_weighted_norm=accuracy * (accuracy_weight/normalization)
+    completeness_weighted_norm=completeness * (completeness_weight/normalization)
+    consistency_weighted_norm=consistency * (consistency_weight/normalization)
+    timeliness_weighted_norm=timeliness * (timeliness_weight/normalization)
 
-    results={'URL': dimensions['URL'],
-             'completeness': completeness_weighted,
-             'consistency': consistency_weighted,
-             'accuracy': accuracy_weighted,
-             'timeliness': timeliness_weighted
+    results={'completeness': completeness_weighted_norm,
+             'consistency': consistency_weighted_norm,
+             'accuracy': accuracy_weighted_norm,
+             'timeliness': timeliness_weighted_norm
              }
 
     return results

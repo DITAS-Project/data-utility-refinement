@@ -1,9 +1,9 @@
 ---
 swagger: "2.0"
 info:
-  description: "Data Utility Refinement"
+  description: "Data Utility Evaluator"
   version: "0.2.1"
-  title: "Data Utility Refinement API"
+  title: "Data Utility Evaluator API"
   contact:
     email: "pierluigi.plebani@polimi.it"
   license:
@@ -45,16 +45,11 @@ definitions:
   DataUtility:
     type: "object"
     required:
-    - "URL"
     - "accuracy"
     - "completeness"
     - "consistency"
     - "timeliness"
     properties:
-      URL:
-        type: "string"
-        format: "url"
-        example: "http://mydatasource/pippo"
       accuracy:
         type: "number"
         format: "float"
@@ -76,7 +71,6 @@ definitions:
       accuracy: 0.1
       completeness: 0.1
       consistency: 0.1
-      URL: "http://mydatasource/pippo"
   RefinementRequest:
     type: "object"
     required:
@@ -98,5 +92,4 @@ definitions:
         accuracy: 0.1
         completeness: 0.1
         consistency: 0.1
-        URL: "http://mydatasource/pippo"
       application: "regression"
