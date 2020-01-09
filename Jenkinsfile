@@ -1,74 +1,82 @@
 pipeline {
-    // Mandatory to use per-stage agents
-    agent none
-    stages {
-        stage('Build - test') {
-            agent {
-                docker {
+	agent none
+	stages {
+		stage('Build - test') {
+			agent {
+				docker {
                     image 'python:slim'
 					// TODO some cache to avoid npm sintall on every execution?
-                }
-            }
-            steps {
+				}
+			}
+			steps {
+                // cr src > if the code is in src folder
                 sh 'cat requirements.txt'
-
-				// Any artifact? Dont think so
-				// TO-DO
-
                 // Run the tests?
-				// TO-DO
+                // TO-DO
             }
             // TODO stop if test fails!
             post {
                 always {
                     // Record the test report?
-                    // TO-DOi
-		    echo "To-Do Record tests"
+                    // TO-DO
+            echo "TO-DO Record tests"
                 }
             }
-        }
-        stage('Image creation') {
+		}
+		stage('Staging image creation') {
+			agent any
+			steps {
+				// The Dockerfile.artifact copies the code into the image and run the jar generation.
+				echo 'Creating the image...'
+				
+				// This will search for a Dockerfile.artifact in the working directory and build the image to the local repository
+				sh "docker build -t \"ditas/data-utility-refinement:staging\" -f Dockerfile.artifact ."
+				echo "Done"
+				echo 'Retrieving Docker Hub password from /opt/ditas-docker-hub.passwd...'
+				
+				// Get the password from a file. This reads the file from the host, not the container. Slaves already have the password in there.
+				script {
+					password = readFile '/opt/ditas-docker-hub.passwd'
+				}
+				echo "Done"
+				echo 'Login to Docker Hub as ditasgeneric...'
+				sh "docker login -u ditasgeneric -p ${password}"
+				echo "Done"
+				echo "Pushing the image ditas/data-utility-refinement:staging..."
+				sh "docker push ditas/data-utility-refinement:staging"
+				echo "Done "
+			}		
+		}
+		stage('Deployment in Staging') {
+			agent any
+			options {
+                // Don't need to checkout Git again
+                skipDefaultCheckout true
+            }
+			steps {
+				// Deploy to Staging environment calling the deployment script
+				sh './jenkins/deploy/deploy-staging.sh'
+			}
+		}
+		stage('Dredd API validation') {
+			agent any
+			steps {
+				sh './jenkins/dredd/run-api-test.sh'
+			}
+		}
+		stage('Production image creation') {
             agent any
-            steps {
-                // The Dockerfile.artifact copies the code into the image and run the jar generation.
-                echo 'Creating the image...'
-                // This will search for a Dockerfile.artifact in the working directory and build the image to the local repository
-                sh "docker build -t \"ditas/data-utility-refinement\" -f Dockerfile.artifact ."
-                echo "Done"
-                echo 'Retrieving Docker Hub password from /opt/ditas-docker-hub.passwd...'
-                // Get the password from a file. This reads the file from the host, not the container. Slaves already have the password in there.
-                script {
-                    password = readFile '/opt/ditas-docker-hub.passwd'
-                }
-                echo "Done"
-                echo 'Login to Docker Hub as ditasgeneric...'
-                sh "docker login -u ditasgeneric -p ${password}"
-                echo "Done"
-                echo "Pushing the image ditas/data-utility-refinement:latest..."
-                sh "docker push ditas/data-utility-refinement:latest"
-                echo "Done "
+            steps {                
+                // Change the tag from staging to production 
+                sh "docker tag ditas/data-utility-refinement:staging ditas/data-utility-refinement:production"
+                sh "docker push ditas/data-utility-refinement:production"
             }
         }
-        stage('Image deploy') {
-            // TO-DO avoid downloading the source from git again, not neccessary. (All the stages do that unnecessary step at this moment, see logs)
+		stage('Deployment in Production') {
             agent any
             steps {
-                // Staging environment: 31.171.247.162
-                // Private key for ssh: /opt/keypairs/ditas-testbed-keypair.pem
-
-                // TODO move all these commands to a deploy.sh to open a single SSH connetions
-                // TODO state management? We are killing without careing about any operation the conainer could be doing.
-
-                // Ensure that a previously running instance is stopped (-f stops and removes in a single step)
-                // || true - "docker stop" failt with exit status 1 if image doen't exists, what makes the Pipeline fail. the "|| true" forces the command to exit with 0.
-                sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker rm -f data-utility-refinement || true'
-
-                // Ensure that the last image is pulled
-                sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker pull ditas/data-utility-refinement:latest'
-
-                // Run and name the image to allow stopping by name
-                sh 'ssh -i /opt/keypairs/ditas-testbed-keypair.pem cloudsigma@31.171.247.162 sudo docker run -p 50000:8080 -d --name data-utility-refinement ditas/data-utility-refinement:latest'
+                sh './jenkins/deploy/deploy-production.sh'
             }
-        }
-    }
+		}
+	}
 }
