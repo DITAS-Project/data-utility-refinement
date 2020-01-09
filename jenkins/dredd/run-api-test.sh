@@ -6,7 +6,7 @@
 COMPONENT_URL="http://31.171.247.162:50000"
 
 # TO CHANGE: This line should point to the yaml file of your respository of your api definition
-YAML_FILE="./api/swagger.yaml"
+YAML_FILE="./swagger_server/swagger/swagger.yaml"
 
 attempts=0
 until $(curl --output /dev/null --silent --head --fail $COMPONENT_URL); do
