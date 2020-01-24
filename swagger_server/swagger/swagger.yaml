@@ -9,7 +9,7 @@ info:
   license:
     name: "TBD"
 host: "localhost:8080"
-basePath: "/ditas-project/DataUtilityRefinement/0.2.1"
+basePath: "/v1"
 tags:
 - name: "Data Utility"
   description: "Definition of data utility"
