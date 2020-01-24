@@ -26,10 +26,10 @@ def refinement(datautility):  # noqa: E501
 
     application=datautility['application']
     dimensions=datautility['datautility']
-
-    results=DQWeighter.DQWeighter(dimensions,application)
-
-
+    allowed_values = ["regression", "classification", "clustering"]
+    if application in allowed_values: 
+        results=DQWeighter.DQWeighter(dimensions,application)
+    else: results=dimensions
 
     return results
 

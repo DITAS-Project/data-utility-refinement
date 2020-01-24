@@ -79,11 +79,11 @@ definitions:
     properties:
       application:
         type: "string"
-        enum:
-        - "regression"
-        - "classification"
-        - "clustering"
-        - "associationrules"
+       # enum:
+       # - "regression"
+        #- "classification"
+       # - "clustering"
+       # - "associationrules"
       datautility:
         $ref: "#/definitions/DataUtility"
     example:
