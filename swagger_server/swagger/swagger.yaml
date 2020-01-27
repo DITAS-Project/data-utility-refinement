@@ -24,6 +24,8 @@ paths:
       description: "By passing the DataUtility values and the application it returns\
         \ new DataUtility values depending on the application"
       operationId: "refinement"
+      consumes:
+      - "application/json"
       produces:
       - "application/json"
       parameters:
